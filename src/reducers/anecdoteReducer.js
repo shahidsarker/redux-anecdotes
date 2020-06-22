@@ -41,9 +41,9 @@ const reducer = (state = initialState, action) => {
   console.log("action", action);
   switch (action.type) {
     case VOTE_ANECDOTE:
-      return state.map((a) =>
-        a.id !== action.data ? a : { ...a, votes: a.votes + 1 }
-      );
+      return state
+        .map((a) => (a.id !== action.data ? a : { ...a, votes: a.votes + 1 }))
+        .sort((a, b) => b.votes - a.votes);
     case ADD_ANECDOTE:
       return [...state, action.data];
     default:
