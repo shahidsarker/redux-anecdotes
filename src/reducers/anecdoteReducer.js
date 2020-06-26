@@ -1,4 +1,5 @@
 import anecdoteService from "../services/anecdotes";
+import { setNotification } from "./notificationReducer";
 
 export const VOTE_ANECDOTE = "VOTE_ANECDOTE";
 export const ADD_ANECDOTE = "ADD_ANECDOTE";
@@ -22,6 +23,7 @@ export const voteAnecdote = (id) => {
       type: VOTE_ANECDOTE,
       data: id,
     });
+    dispatch(setNotification(`you voted ${anecdote.content}`, 10));
   };
 };
 
@@ -32,6 +34,7 @@ export const addAnecdote = (content) => {
       type: ADD_ANECDOTE,
       data: newAnecdote,
     });
+    dispatch(setNotification(`new anecdote '${content}'`));
   };
 };
 

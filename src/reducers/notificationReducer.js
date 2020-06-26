@@ -5,10 +5,15 @@ const CLEAR = "CLEAR";
  *
  * @param {string} message Notification message
  */
-export const setNotification = (message) => {
-  return {
-    type: SET,
-    data: message,
+export const setNotification = (message, seconds = 5) => {
+  return (dispatch) => {
+    dispatch({
+      type: SET,
+      data: message,
+    });
+    setTimeout(() => {
+      dispatch({ type: CLEAR });
+    }, 1000 * seconds);
   };
 };
 
