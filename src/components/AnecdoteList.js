@@ -8,6 +8,7 @@ import {
 
 const AnecdoteList = (props) => {
   const anecdotes = useSelector((state) => state.anecdotes);
+  const filter = useSelector((state) => state.filter);
 
   const dispatch = useDispatch();
   const vote = (id) => {
@@ -19,9 +20,12 @@ const AnecdoteList = (props) => {
     }, 5000);
   };
 
+  const filteredAnecdotes = anecdotes.filter((a) => a.content.includes(filter));
+  console.log(filteredAnecdotes);
+
   return (
     <>
-      {anecdotes.map((anecdote) => (
+      {filteredAnecdotes.map((anecdote) => (
         <div key={anecdote.id}>
           <div>{anecdote.content}</div>
           <div>

@@ -1,5 +1,3 @@
-const notificationAtStart = "render here notification...";
-
 const SET = "SET";
 const CLEAR = "CLEAR";
 
@@ -18,7 +16,7 @@ export const clearNotification = () => {
   return { type: CLEAR };
 };
 
-const initialState = notificationAtStart;
+const initialState = "";
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
