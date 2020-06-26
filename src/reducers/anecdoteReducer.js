@@ -1,19 +1,14 @@
+import anecdoteService from "../services/anecdotes";
+
 export const VOTE_ANECDOTE = "VOTE_ANECDOTE";
 export const ADD_ANECDOTE = "ADD_ANECDOTE";
 export const INIT_ANECDOTES = "INIT_ANECDOTES";
 
-const getId = () => (100000 * Math.random()).toFixed(0);
-
-const asObject = (anecdote) => {
-  return {
-    content: anecdote,
-    id: getId(),
-    votes: 0,
+export const initializeAnecdotes = () => {
+  return async (dispatch) => {
+    const anecdotes = await anecdoteService.getAll();
+    dispatch({ type: INIT_ANECDOTES, data: anecdotes });
   };
-};
-
-export const initializeAnecdotes = (anecdotes) => {
-  return { type: INIT_ANECDOTES, data: anecdotes };
 };
 
 export const voteAnecdote = (id) => {
@@ -23,10 +18,13 @@ export const voteAnecdote = (id) => {
   };
 };
 
-export const addAnecdote = (data) => {
-  return {
-    type: ADD_ANECDOTE,
-    data,
+export const addAnecdote = (content) => {
+  return async (dispatch) => {
+    const newAnecdote = await anecdoteService.createNew(content);
+    dispatch({
+      type: ADD_ANECDOTE,
+      data: newAnecdote,
+    });
   };
 };
 
