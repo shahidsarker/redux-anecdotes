@@ -1,15 +1,30 @@
 const notificationAtStart = "render here notification...";
 
-const NOTIFY = "NOTIFY";
-const CLEAR_NOTIFICATION = "CLEAR_NOTIFICATION";
+const SET = "SET";
+const CLEAR = "CLEAR";
+
+/**
+ *
+ * @param {string} message Notification message
+ */
+export const setNotification = (message) => {
+  return {
+    type: SET,
+    data: message,
+  };
+};
+
+export const clearNotification = () => {
+  return { type: CLEAR };
+};
 
 const initialState = notificationAtStart;
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case NOTIFY:
+    case SET:
       return action.data;
-    case CLEAR_NOTIFICATION:
+    case CLEAR:
       return null;
     default:
       return state;
