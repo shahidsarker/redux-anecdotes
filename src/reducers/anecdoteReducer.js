@@ -12,9 +12,16 @@ export const initializeAnecdotes = () => {
 };
 
 export const voteAnecdote = (id) => {
-  return {
-    type: VOTE_ANECDOTE,
-    data: id,
+  return async (dispatch) => {
+    const anecdote = await anecdoteService.getOne(id);
+    await anecdoteService.updateOne(id, {
+      ...anecdote,
+      votes: anecdote.votes++,
+    });
+    dispatch({
+      type: VOTE_ANECDOTE,
+      data: id,
+    });
   };
 };
 
