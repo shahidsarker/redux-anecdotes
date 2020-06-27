@@ -17,7 +17,7 @@ export const voteAnecdote = (id) => {
     const anecdote = await anecdoteService.getOne(id);
     await anecdoteService.updateOne(id, {
       ...anecdote,
-      votes: anecdote.votes++,
+      votes: anecdote.votes + 1,
     });
     dispatch({
       type: VOTE_ANECDOTE,
